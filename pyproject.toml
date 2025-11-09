@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.12"
 dependencies = [
+    "ipywidgets>=8.1.8",
     "jupyterlab>=4.4.10",
     "pandas>=2.3.3",
     "scikit-learn>=1.7.2",
