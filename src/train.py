@@ -70,21 +70,21 @@ preprocessing_lr = ColumnTransformer(
 final_model = Pipeline(steps=[
     ('pre', preprocessing_lr),
     ('clf', LogisticRegression(
-    penalty='l1',
-    C=0.1,
-    max_iter=300,
-    solver='liblinear',
-    random_state=42,
-    class_weight='balanced'
+        penalty='l1',
+        C=0.1,
+        max_iter=300,
+        solver='liblinear',
+        random_state=42,
+        class_weight='balanced'
 ))
 ])
 
 print("Training model started...")
-final_model.fit(X_train, y_train)
+model = final_model.fit(X_train, y_train)
 print("Training model completed.")
 
 
 print("Exporting The Model")
-with open("../model/final_model.bin", "wb") as f:
-    pickle.dump(final_model, f)
+with open("../final_model.bin", "wb") as f:
+    pickle.dump(model, f)
 print("Model Exported")

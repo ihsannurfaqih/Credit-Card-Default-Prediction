@@ -10,7 +10,7 @@ COPY "pyproject.toml" "uv.lock" ".python-version" ./
 
 RUN uv sync --locked
 
-COPY "/model/final_model.bin" ./
+COPY "model/final_model.bin" ./
 
 COPY "src/predict.py" ./
 
