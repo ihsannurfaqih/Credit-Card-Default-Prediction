@@ -47,7 +47,7 @@ def predict_single(customer):
 
 @app.post("/predict")
 def predict(customer: Customer) -> PredictResponse:
-    prob = predict_single(pd.DataFrame([customer]))
+    prob = predict_single(customer.model_dump())
 
     return PredictResponse(
         default_probability=prob,

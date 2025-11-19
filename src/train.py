@@ -2,6 +2,7 @@ import pandas as pd
 import numpy as np
 
 from sklearn.compose import ColumnTransformer
+from sklearn.feature_extraction import DictVectorizer
 from sklearn.pipeline import Pipeline
 from sklearn.model_selection import train_test_split, RandomizedSearchCV
 from sklearn.preprocessing import StandardScaler, OneHotEncoder, LabelEncoder, MinMaxScaler
@@ -59,16 +60,19 @@ X_train, X_test, y_train, y_test = train_test_split(df.drop(columns=['default'])
 X_train = X_train[selected_feature].copy()
 X_test = X_test[selected_feature].copy()
 
+X_train = X_train.to_dict(orient='records')
+X_test = X_test.to_dict(orient='records')
 
-preprocessing_lr = ColumnTransformer(
-    transformers=[
-        ('num', MinMaxScaler(), selected_feature)
-    ]
-, remainder='drop'
-)
+# preprocessing_lr = ColumnTransformer(
+#     transformers=[
+#         ('num', MinMaxScaler(), selected_feature)
+#     ]
+# , remainder='drop'
+# )
 
 final_model = Pipeline(steps=[
-    ('pre', preprocessing_lr),
+    ('vectorizer', DictVectorizer()),
+    # ('scale', MinMaxScaler()),
     ('clf', LogisticRegression(
         penalty='l1',
         C=0.1,
