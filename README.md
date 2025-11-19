@@ -8,6 +8,7 @@
 ```bash
 conda create -n example_env
 conda activate example_env
+conda install python=3.12
 conda install uv
 uv sync --locked
 ```
